@@ -34,6 +34,19 @@ else
     echo "Failed to find and export UBUNTU_SETUP_ROOT."
 fi
 
-source ${UBUNTU_SETUP_ROOT}/utility_tool_bash/log_helper.sh
+source $UBUNTU_SETUP_ROOT/utility_tool_bash/log_helper.sh
 
-execute_with_check "sudo apt update"
+log_info $(get_cur_line_number)
+execute_with_check "sudo apt update && sudo apt upgrade -y"
+
+log_info $(get_cur_line_number)
+execute_with_check "sudo apt install git vim curl net-tools openssh*"
+
+log_info $(get_cur_line_number)
+execute_with_check "sudo apt install libceres-dev libyaml-cpp-dev"
+
+log_info $(get_cur_line_number)
+execute_with_check "sudo apt install -y ros-* python3-pip"
+
+log_info $(get_cur_line_number)
+execute_with_check "sudo pip3 install -U catkin_tools --break-system-packages"

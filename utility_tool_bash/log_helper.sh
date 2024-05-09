@@ -12,7 +12,7 @@
 get_cur_line_number() {
     local LINENO
     LINENO=$(caller 0 | awk '{print $1}')
-    echo -n "[$LINENO]"
+    echo -n "LINE: $LINENO:"
 }
 
 # 重置颜色
