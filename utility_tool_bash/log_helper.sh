@@ -65,3 +65,16 @@ execute_with_check() {
         log_info "successfully execute: ${cmd}!"
     fi
 }
+
+# 检查命令执行结果的函数
+execute_with_check_warn() {
+    local cmd="$*"
+    log_info "try to execute: ${cmd}"
+    eval "${cmd}"
+    local exit_code=$?
+    if [ $exit_code -ne 0 ]; then
+        log_warning "warning execute: ${cmd}!"
+    else
+        log_info "successfully execute: ${cmd}!"
+    fi
+}
