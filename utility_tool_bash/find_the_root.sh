@@ -2,13 +2,11 @@
 
 ######################################################################
 # @author      : ShunLi (2015097272@qq.com)
-# @file        : install_ros_and_its_dependences
-# @created     : 星期四 5月 09, 2024 14:59:22 CST
+# @file        : find_the_root
+# @created     : 星期四 5月 09, 2024 16:45:16 CST
 #
-# @description : install_ros_and_its_dependences
+# @description :
 ######################################################################
-
-#!/bin/bash
 
 find_git_parent() {
     local current_dir="$1"
@@ -29,11 +27,7 @@ find_git_parent() {
 ubuntu_setup_root=$(find_git_parent "$PWD")
 if [ $? -eq 0 ]; then
     export UBUNTU_SETUP_ROOT="$ubuntu_setup_root"
-    echo "Exported GIT_ROOT=$UBUNTU_SETUP_ROOT"
+    echo "Exported GIT_ROOT=$GIT_ROOT"
 else
-    echo "Failed to find and export UBUNTU_SETUP_ROOT."
+    echo "Failed to find and export GIT_ROOT."
 fi
-
-source ${UBUNTU_SETUP_ROOT}/utility_tool_bash/log_helper.sh
-
-execute_with_check "sudo apt update"
