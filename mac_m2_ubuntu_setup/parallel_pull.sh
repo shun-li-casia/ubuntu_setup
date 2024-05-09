@@ -9,7 +9,7 @@
 ######################################################################
 
 # 仓库目录列表
-REPO_DIRS=("path/to/repo1" "path/to/repo2" "path/to/repo3" "path/to/repo4" "path/to/repo5" "path/to/repo6")
+REPO_DIRS=("$HOME/catkin_ws/src/camera_models" "$HOME/catkin_ws/src/image_algorithm" "$HOME/catkin_ws/src/image_imu_file_processor" "$HOME/catkin_ws/src/image_imu_post_processor" "$HOME/catkin_ws/src/sensor_config" "$HOME/catkin_ws/src/utility_tool")
 
 # 更新函数
 update_repo() {
