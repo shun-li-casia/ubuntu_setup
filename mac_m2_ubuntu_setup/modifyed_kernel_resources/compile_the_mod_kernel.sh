@@ -85,12 +85,14 @@ execute_with_check "cp /boot/config-`uname -r`  ./.config"
 execute_with_check "make -j $(( $(nproc) - 1 ))"
 execute_with_check "make modules -j $(( $(nproc) - 1 ))"
 
-if [$IF_INSTALL = "--install"]
+if [ "$IF_INSTALL" == "--install" ]; then
     execute_with_check "sudo make -j $(( $(nproc) - 1 )) install"
     execute_with_check "sudo make modules_install -j $(( $(nproc) - 1 ))"
     execute_with_check "sudo update-grub"
     execute_with_check "sudo update-grub2"
     log_info "you need to replace the grub file to make the new kernel takes effect!"
 fi
+
+log_info "DONE!"
 
 exit 0;
