@@ -47,7 +47,6 @@ fi
 source $UBUNTU_SETUP_ROOT/utility_tool_bash/log_helper.sh
 
 # start
-
 if [ "$#" -ne 1 ]; then
     echo "Usage: $0 <the absolute tar.gz path>"
     exit 1
@@ -70,6 +69,11 @@ else
 fi
 
 execute_with_check "cd linux-asahi"
+
+# install the dependences
+execute_with_check "sudo apt-get update"
+execute_with_check "sudo apt-get install -y cmake g++ build-essential ncurses-dev flex bison libssl-dev libelf-dev dwarves bc procps zlib1g-dev libattr1-dev libblkid-dev libselinux-dev kmod libaio-dev libmount-dev uuid-dev"
+execute_with_check "sudo apt-get install -y e2fsprogs-dev reiserfs-progs"
 
 execute_with_check "sudo make -j $(( $(nproc) - 1 )) install"
 execute_with_check "sudo make modules -j $(( $(nproc) - 1 ))"
