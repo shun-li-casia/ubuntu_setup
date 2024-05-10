@@ -62,12 +62,20 @@ echo "ubuntu ALL=(ALL) NOPASSWD:$this_script" | sudo EDITOR='tee -a' visudo
 execute_with_check "mkdir -p $COMPILE_SOURCE"
 execute_with_check "cd $COMPILE_SOURCE"
 
-execute_with_check "sudo tar xzvf $COMPRESSED_SRC"
+# Use the [-d] test construct to check if the directory exists
+if [ -d "$COMPILE_SOURCE/linux-asahi" ]; then
+    echo "Directory already exists: $COMPILE_SOURCE/linux-asahi"
+else
+    execute_with_check "sudo tar xzvf $COMPRESSED_SRC"
+fi
+
 execute_with_check "cd linux-asahi"
+
 execute_with_check "sudo make -j $(( $(nproc) - 1 )) install"
 execute_with_check "sudo make modules -j $(( $(nproc) - 1 ))"
 execute_with_check "sudo make modules_install -j $(( $(nproc) - 1 ))"
 execute_with_check "sudo update-grub"
 execute_with_check "sudo update-grub2"
+
 log_info "you need to replace the grub file to make the new kernel takes effect!"
 exit 0;
