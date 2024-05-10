@@ -47,16 +47,21 @@ fi
 source $UBUNTU_SETUP_ROOT/utility_tool_bash/log_helper.sh
 
 # start
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <the absolute tar.gz path>"
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <the absolute tar.gz path> <--(no_)install>"
     exit 1
 fi
 
 COMPRESSED_SRC="$1"
+IF_INSTALL="$2"
 COMPILE_SOURCE=$HOME/modified_linux_asahi_build
 
-execute_with_check "sudo cp -r /etc/sudoers /etc/sudoers_bk"
-echo "ubuntu ALL=(ALL) NOPASSWD:$this_script" | sudo EDITOR='tee -a' visudo
+if [ -f "/etc/sudoers_bk" ]; then
+    log_info "the /etc/sudoers_bk already exists!"
+else
+    execute_with_check "sudo cp -r /etc/sudoers /etc/sudoers_bk"
+    echo "ubuntu all=(all) nopasswd:$this_script" | sudo editor='tee -a' visudo
+fi
 
 execute_with_check "mkdir -p $COMPILE_SOURCE"
 execute_with_check "cd $COMPILE_SOURCE"
@@ -78,11 +83,14 @@ execute_with_check "sudo apt-get install -y cmake g++ build-essential ncurses-de
 execute_with_check "cp /boot/config-`uname -r`  ./.config"
 
 execute_with_check "make -j $(( $(nproc) - 1 ))"
-execute_with_check "sudo make -j $(( $(nproc) - 1 )) install"
-execute_with_check "sudo make modules -j $(( $(nproc) - 1 ))"
-execute_with_check "sudo make modules_install -j $(( $(nproc) - 1 ))"
-execute_with_check "sudo update-grub"
-execute_with_check "sudo update-grub2"
+execute_with_check "make modules -j $(( $(nproc) - 1 ))"
 
-log_info "you need to replace the grub file to make the new kernel takes effect!"
+if [$IF_INSTALL = "--install"]
+    execute_with_check "sudo make -j $(( $(nproc) - 1 )) install"
+    execute_with_check "sudo make modules_install -j $(( $(nproc) - 1 ))"
+    execute_with_check "sudo update-grub"
+    execute_with_check "sudo update-grub2"
+    log_info "you need to replace the grub file to make the new kernel takes effect!"
+fi
+
 exit 0;
