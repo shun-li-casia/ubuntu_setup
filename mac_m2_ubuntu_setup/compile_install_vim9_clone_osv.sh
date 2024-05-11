@@ -68,6 +68,5 @@ execute_with_check "vim --version"
 execute_with_check_warn "git clone --depth 1 https://github.com/lee-shun/old_school_vim .vim"
 
 # install the lsp
-execute_with_check "sudo apt install ccls clangd clang-format"
-execute_with_check " "
+execute_with_check "sudo apt install -y ccls clangd clang-format"
 exit 0;
