@@ -65,7 +65,7 @@ execute_with_check "sudo make -j $(( $(nproc) - 1 )) install"
 execute_with_check "vim --version"
 
 # download the osv
-execute_with_check_warn "git clone --depth 1 https://github.com/lee-shun/old_school_vim .vim"
+execute_with_check_warn "git clone --depth 1 https://github.com/lee-shun/old_school_vim $HOME/.vim"
 
 # install the lsp
 execute_with_check "sudo apt install -y ccls clangd clang-format"
