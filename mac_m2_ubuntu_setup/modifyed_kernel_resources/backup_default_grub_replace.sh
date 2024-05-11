@@ -47,8 +47,15 @@ else
 fi
 source $UBUNTU_SETUP_ROOT/utility_tool_bash/log_helper.sh
 
-execute_with_check "sudo mv /etc/default/grub /etc/default/grub_backup"
-execute_with_check "sudo cp -r $script_dir/grub /etc/default/grub"
+# start
+grub_bk="/etc/default/grub_bk "
+if [ -f "$grub_bk" ]; then
+    log_info "the $grub_bk already exists!"
+else
+    execute_with_check "sudo mv /etc/default/grub $grub_bk"
+    execute_with_check "sudo cp -r $script_dir/grub /etc/default/grub"
+fi
+
 execute_with_check "sudo update-grub"
 execute_with_check "sudo update-grub2"
 log_info "you need to reboot the mac to make the grub to take effect!"
