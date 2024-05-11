@@ -79,15 +79,18 @@ execute_with_check "cd linux-asahi"
 execute_with_check "sudo apt-get update"
 execute_with_check "sudo apt-get install -y cmake g++ build-essential ncurses-dev flex bison libssl-dev libelf-dev dwarves bc procps zlib1g-dev libattr1-dev libblkid-dev libselinux-dev kmod libaio-dev libmount-dev uuid-dev"
 
+# clean
+execute_with_check "sudo make mrproper"
+
 # copy the .config
-execute_with_check "cp /boot/config-`uname -r`  ./.config"
+execute_with_check "cp $script_dir/config  ./.config"
 
 execute_with_check "make -j $(( $(nproc) - 1 ))"
 execute_with_check "make modules -j $(( $(nproc) - 1 ))"
 
 if [ "$IF_INSTALL" == "--install" ]; then
-    execute_with_check "sudo make -j $(( $(nproc) - 1 )) install"
     execute_with_check "sudo make modules_install -j $(( $(nproc) - 1 ))"
+    execute_with_check "sudo make -j $(( $(nproc) - 1 )) install"
     execute_with_check "sudo update-grub"
     execute_with_check "sudo update-grub2"
     log_info "you need to replace the grub file to make the new kernel takes effect!"
