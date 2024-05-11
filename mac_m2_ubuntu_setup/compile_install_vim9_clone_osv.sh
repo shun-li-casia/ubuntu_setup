@@ -8,6 +8,18 @@
 # @description :
 ######################################################################
 
+#!/bin/bash
+
+# Check if the script is running with root privileges
+if [ "$(id -u)" -ne 0 ]; then
+    echo "This script requires root privileges. Please run it with 'sudo' or as the root user."
+    exit 1
+fi
+
+# Main body of the script
+echo "The script is running with root privileges."
+# Continue with your script logic here...
+
 find_setup_root() {
     local current_dir="$1"
     local parent_dir
