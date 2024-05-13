@@ -9,7 +9,11 @@
 ######################################################################
 
 # 仓库目录列表
-REPO_DIRS=("$HOME/catkin_ws/src/camera_models" "$HOME/catkin_ws/src/image_algorithm" "$HOME/catkin_ws/src/image_imu_file_processor" "$HOME/catkin_ws/src/image_imu_post_processor" "$HOME/catkin_ws/src/sensor_config" "$HOME/catkin_ws/src/utility_tool")
+# 读取用户输入的目标目录路径
+read -p "input the abs directory of the directories to be pull: " targetDirectory
+
+# 使用find命令获取所有一级子目录
+subDirectories=($(find "$targetDirectory" -maxdepth 1 -mindepth 1 -type d))
 
 # 更新函数
 update_repo() {
@@ -36,7 +40,8 @@ update_repo() {
 }
 
 # 并行更新
-for repo_dir in "${REPO_DIRS[@]}"; do
+for repo_dir in "${subDirectories[@]}"; do
+    echo "$repo_dir"
     update_repo "$repo_dir" &
 done
 
