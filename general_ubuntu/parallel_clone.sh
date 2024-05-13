@@ -5,19 +5,43 @@
 # @file        : parallel_clone
 # @created     : 星期四 5月 09, 2024 18:06:01 CST
 #
-# @description : 
+# @description :
 ######################################################################
 
 # 仓库列表
-REPOS=("https://github.com/repo1.git" "https://github.com/repo2.git" "https://github.com/repo3.git" "https://github.com/repo4.git" "https://github.com/repo5.git" "https://github.com/repo6.git")
+user_name="shun-li-casia"
+REPOS=("image_algorithm" "image_imu_post_processor" "image_imu_file_processor" "utility_tool" "sensor_config")
+
+# 询问用户选择克隆协议
+echo "choose the protocol(HTTPS/SSH):"
+select protocol in "HTTPS" "SSH"; do
+  case $protocol in
+    HTTPS|SSH)
+      break
+      ;;
+    *)
+      echo "Invalid option, please choose again."
+      ;;
+  esac
+done
+
+# 根据用户选择设置URL前缀
+if [ "$protocol" = "HTTPS" ]; then
+  url_prefix="https://github.com/$user_name/"
+elif [ "$protocol" = "SSH" ]; then
+  url_prefix="git@github.com:$user_name/"
+fi
+
+read -p "Enter a path (default is current): " clone_path
+clone_path=${clone_path:-$(pwd)}
 
 # 克隆函数
 clone_repo() {
-    local repo_url=$1
+    local repo=$1
     local retry_count=0
     local max_retries=3
 
-    until git clone "$repo_url"; do
+    until git clone $url_prefix$repo $clone_path/$repo; do
         if (( retry_count < max_retries )); then
             echo "Clone of $repo_url failed, retrying ($((retry_count + 1)) of $max_retries)..."
             ((retry_count++))
