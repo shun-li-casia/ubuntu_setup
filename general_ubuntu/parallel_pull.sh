@@ -8,12 +8,31 @@
 # @description :
 ######################################################################
 
+expand_path() {
+    local path="$1"
+    local expanded_path=""
+
+    # Expand ~ to home directory
+    if [[ $path == "~"* ]]; then
+        expanded_path="${path/\~/$HOME}"
+    else
+        expanded_path="$path"
+    fi
+
+    # Resolve . and ..
+    expanded_path=$(realpath -e "$expanded_path")
+
+    echo "$expanded_path"
+}
+
 # 仓库目录列表
 # 读取用户输入的目标目录路径
-read -p "input the abs directory of the directories to be pull: " targetDirectory
+read -p "input the directory of the directories to be pull: " targetDirectory
+
+asbPath=$(expand_path "$targetDirectory")
 
 # 使用find命令获取所有一级子目录
-subDirectories=($(find "$targetDirectory" -maxdepth 1 -mindepth 1 -type d))
+subDirectories=($(find "$asbPath" -maxdepth 1 -mindepth 1 -type d))
 
 # 更新函数
 update_repo() {
