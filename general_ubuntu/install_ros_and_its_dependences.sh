@@ -52,7 +52,7 @@ source $UBUNTU_SETUP_ROOT/utility_tool_bash/log_helper.sh
 # start the install
 
 log_info $(get_cur_line_number)
-execute_with_check "sudo apt update && sudo apt upgrade -y"
+execute_with_check "sudo apt update"
 
 log_info $(get_cur_line_number)
 execute_with_check "sudo apt install -y git curl net-tools openssh*"
