@@ -110,7 +110,6 @@ bindsym $mod+Shift+c kill
 bindsym $mod+shift+p exec --no-startup-id rofi -show run
 bindsym $mod+p exec --no-startup-id rofi -show drun
 
-bindsym $mod+shift+b exec --no-startup-id google-chrome  --password-store=gnome
 bindsym $mod+b exec --no-startup-id microsoft-edge  --password-store=basic
 bindsym $mod+o exec --no-startup-id flameshot gui
 
@@ -355,8 +354,8 @@ exec --no-startup-id picom -o 0.95 -i 0.88 -f -D 5 -c -b
 # exec --no-startup-id bash ~/.screenlayout/only_out.sh
 exec --no-startup-id feh  --bg-fill /home/ls/Pictures/wallhaven-85m5g2.png
 
-exec --no-startup-id bash ~/.config/useful_scripts/tap-to-click.sh
-exec --no-startup-id bash ~/.config/useful_scripts/inverse_scroll.sh
+exec --no-startup-id bash ~/.config/i3_scripts/tap-to-click.sh
+exec --no-startup-id bash ~/.config/i3_scripts/inverse_scroll.sh
 
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-volumed

@@ -119,7 +119,8 @@ export INFOPATH=${INFOPATH}:/usr/local/texlive/2022/texmf-dist/doc/info
 export PATH=${PATH}:/usr/local/texlive/2022/bin/x86_64-linux
 
 # ros1
-# source /opt/ros/noetic/setup.zsh
+source /opt/ros/noetic/setup.zsh
+source ~/vins_ws/devel/setup.zsh
 # source ~/catkin_ws/devel/setup.zsh
 # cv_bridge
 # source ~/cv_bridge_ws/install/setup.zsh --extend
