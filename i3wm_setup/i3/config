@@ -113,7 +113,7 @@ bindsym $mod+p exec --no-startup-id rofi -show drun
 bindsym $mod+b exec --no-startup-id microsoft-edge  --password-store=basic
 bindsym $mod+o exec --no-startup-id flameshot gui
 
-bindsym $mod+e exec --no-startup-id polybar top & polybar external_hdpi_top
+bindsym $mod+e exec --no-startup-id polybar hdpi_top & polybar external_hdpi_top
 bindsym $mod+shift+e exec --no-startup-id killall polybar
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -352,7 +352,7 @@ client.urgent               $yw     $nblack     $tx     $id
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
 exec --no-startup-id picom -o 0.95 -i 0.88 -f -D 5 -c -b
 # exec --no-startup-id bash ~/.screenlayout/only_out.sh
-exec --no-startup-id feh  --bg-fill /home/ls/Pictures/wallhaven-85m5g2.png
+exec --no-startup-id feh  --bg-fill ~/Pictures/wallhaven-85m5g2.png
 
 exec --no-startup-id bash ~/.config/i3_scripts/tap-to-click.sh
 exec --no-startup-id bash ~/.config/i3_scripts/inverse_scroll.sh
@@ -361,6 +361,7 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift-gtk
+exec --no-startup-id fcitx
 exec --no-startup-id ~/Downloads/LibCyber-V2.7.30.AppImage
 
 # vim:filetype=i3config
