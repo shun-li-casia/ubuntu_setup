@@ -350,7 +350,7 @@ client.urgent               $yw     $nblack     $tx     $id
 
 # display
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
-exec --no-startup-id picom -o 0.95 -i 0.88 -f -D 5 -c -b
+exec --no-startup-id picom -o 0.95 -i 0.88 -f -D 5 -c -b -r 15 --vsync
 # exec --no-startup-id bash ~/.screenlayout/only_out.sh
 exec --no-startup-id feh  --bg-fill ~/Pictures/wallhaven-d6dvdl.png
 
@@ -362,6 +362,6 @@ exec --no-startup-id xfce4-volumed
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift-gtk
 exec --no-startup-id fcitx
-exec --no-startup-id ~/Downloads/LibCyber-V2.7.30.AppImage
+exec --no-startup-id ~/App/LibCyber-V2.7.19.AppImage
 
 # vim:filetype=i3config
