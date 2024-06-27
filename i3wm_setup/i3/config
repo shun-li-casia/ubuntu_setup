@@ -352,7 +352,7 @@ client.urgent               $yw     $nblack     $tx     $id
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
 exec --no-startup-id picom -o 0.95 -i 0.88 -f -D 5 -c -b
 # exec --no-startup-id bash ~/.screenlayout/only_out.sh
-exec --no-startup-id feh  --bg-fill ~/Pictures/wallhaven-85m5g2.png
+exec --no-startup-id feh  --bg-fill ~/Pictures/wallhaven-d6dvdl.png
 
 exec --no-startup-id bash ~/.config/i3_scripts/tap-to-click.sh
 exec --no-startup-id bash ~/.config/i3_scripts/inverse_scroll.sh
