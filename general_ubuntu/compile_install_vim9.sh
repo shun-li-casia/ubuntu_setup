@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 ######################################################################
 # @author      : ShunLi (2015097272@qq.com)
@@ -8,7 +8,6 @@
 # @description :
 ######################################################################
 
-#!/bin/bash
 
 find_setup_root() {
     local current_dir="$1"
@@ -47,26 +46,21 @@ else
     echo "Failed to set UBUNTU_SETUP_ROOT."
 fi
 source $UBUNTU_SETUP_ROOT/utility_tool_bash/log_helper.sh
+source $UBUNTU_SETUP_ROOT/utility_tool_bash/clone_checkout_latest_tag.sh
 
 # download the git source code
 vim_source=$HOME/vim_source
 log_info $(get_cur_line_number)
-execute_with_check "sudo apt install -y git  libatk1.0-dev  libcairo2-dev  libgtk2.0-dev liblua5.1-0-dev  libncurses5-dev  libperl-dev  libx11-dev  libxpm-dev  libxt-dev  lua5.1  python3-dev  ruby-dev"
+execute_with_check "sudo apt install -y git  libatk1.0-dev  libcairo2-dev  libgtk-3-dev libgtk2.0-dev liblua5.1-0-dev  libncurses5-dev  libperl-dev  libx11-dev  libxpm-dev  libxt-dev  lua5.1  python3-dev  ruby-dev"
 
-execute_with_check_warn "git clone --depth 1 https://github.com/vim/vim.git ${vim_source}"
+checkout_latest_tag "https://github.com/vim/vim.git" "${vim_source}"
 
 cd $vim_source || { log_error "can not cd $vim_source!"; exit 1; }
 log_info "prepare to compile the vim"
-execute_with_check "./configure --with-features=huge  --enable-multibyte  --enable-rubyinterp=yes  --enable-python3interp=yes  --with-python3-command=$PYTHON_VER  --with-python3-config-dir=$(python3-config --configdir)  --enable-perlinterp=yes  --enable-gui=auto  --enable-cscope  --prefix=/usr/local"
+execute_with_check "./configure --with-features=huge --enable-multibyte  --enable-perlinterp  --enable-python3interp  --enable-rubyinterp --enable-luainterp --enable-tclinterp --enable-gui=gtk3 --enable-fail-if-missing"
 
 execute_with_check "make -j $(( $(nproc) - 1 ))"
 execute_with_check "sudo make -j $(( $(nproc) - 1 )) install"
 
 execute_with_check "vim --version"
-
-# download the osv
-execute_with_check_warn "git clone --depth 1 https://github.com/lee-shun/old_school_vim $HOME/.vim"
-
-# install the lsp
-execute_with_check "sudo apt install -y ccls clangd clang-format"
 exit 0;

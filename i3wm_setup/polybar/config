@@ -327,7 +327,7 @@ format-padding = 1
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp44s0
 interval = 1.0
 format-connected = <label-connected>
 format-connected-prefix =" "

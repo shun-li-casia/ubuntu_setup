@@ -161,7 +161,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/ls/perl5"; export PERL_MM_OPT;
 export PATH="/home/ls/.cargo/bin:$PATH"
 
 # npm
-export PATH=~/node_modules/.bin:$PATH
+export PATH=~/local_lsp/npm_modules/bin:$PATH
 
 # local lsp
 alias luamake=/home/ls/local_lsp/lua-language-server/3rd/luamake/luamake
