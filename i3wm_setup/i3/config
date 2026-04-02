@@ -110,7 +110,8 @@ bindsym $mod+Shift+c kill
 bindsym $mod+shift+p exec --no-startup-id rofi -show run
 bindsym $mod+p exec --no-startup-id rofi -show drun
 
-bindsym $mod+b exec --no-startup-id microsoft-edge  --password-store=basic
+# bindsym $mod+b exec --no-startup-id microsoft-edge  --password-store=basic
+bindsym $mod+b exec --no-startup-id ~/App/zen/zen
 bindsym $mod+o exec --no-startup-id flameshot gui
 
 bindsym $mod+e exec --no-startup-id polybar hdpi_top & polybar external_hdpi_top
@@ -352,7 +353,8 @@ client.urgent               $yw     $nblack     $tx     $id
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
 exec --no-startup-id picom -o 0.95 -i 0.88 -f -D 5 -c -b -r 15 --vsync
 # exec --no-startup-id bash ~/.screenlayout/only_out.sh
-exec --no-startup-id feh  --bg-fill ~/Pictures/wallhaven-d6dvdl.png
+exec --no-startup-id feh  --bg-fill ~/Pictures/wallhaven-kwov61.png
+
 
 exec --no-startup-id bash ~/.config/i3_scripts/tap-to-click.sh
 exec --no-startup-id bash ~/.config/i3_scripts/inverse_scroll.sh
